@@ -11,7 +11,9 @@ x-xx-port-mapping:
   collector: &collector-ports
     - 8080:8080
   collecor-mongo: &collector-mongo-ports
-    - 27017:27017
+    - 27017:27017 # TODO Disable me
+  client-ports: &dash-client-ports
+    - 8880:80
 
 x-xx-common-services-settings: &common-settings
   restart: always
@@ -19,7 +21,7 @@ x-xx-common-services-settings: &common-settings
 services:
   collector:
     <<: *common-settings
-    image: aleskandro/mora/metrics-collector
+    image: aleskandro/mora-metrics-collector
     environment: *collector-mongo-env
     ports: *collector-ports
 
@@ -30,6 +32,11 @@ services:
     ports: *collector-mongo-ports
     volumes:
       - mongo-data:/data/db
+
+  nginx-dash-client:
+    <<: *common-settings
+    image: aleskandro/mora-dash-client
+    ports: *dash-client-ports
 
 volumes:
   mongo-data:

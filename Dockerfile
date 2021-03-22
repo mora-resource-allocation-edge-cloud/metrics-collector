@@ -33,7 +33,7 @@ LABEL author="aleskandro"
 LABEL name="mora-metrics-collector"
 LABEL description="Metrics collector with Mongo Driver for MORA real testbed"
 
-COPY ./conf ./conf
+COPY ./conf/app.prod.conf ./conf/app.conf
 # Copy built executable
 COPY --from=buildstage /service ./
 CMD ["./service"]

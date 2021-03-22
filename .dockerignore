@@ -1,3 +1,5 @@
-./swagger
-./*.tmp
-./metrics-collector
+swagger
+*.tmp
+metrics-collector
+*[Dd]ocker*
+.git*
